@@ -1,17 +1,17 @@
 from xml.etree import ElementTree
 
-def get_coords_by_id():
+def get_coords_by_id(name='map.osm'):
     ret = {}
-    data = ElementTree.parse("map.osm")
+    data = ElementTree.parse(name)
     root = data.getroot()
     for node in root:
         if node.tag == 'node':
             ret[int(node.attrib['id'])] = (float(node.attrib['lat']), float(node.attrib['lon']))
     return ret
 
-def get_ways(coords):
+def get_ways(coords, name='map.osm'):
     ret = []
-    data = ElementTree.parse("map.osm")
+    data = ElementTree.parse(name)
     root = data.getroot()
     for way in root:
         if way.tag == 'way':
@@ -50,5 +50,5 @@ def main():
     print(len(compr), len(ways))
     for way in ways:
         print(way[0] + 1, way[1] + 1, way[2])
-
-main()
+if __name__ == '__main__':
+    main()
