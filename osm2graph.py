@@ -1,4 +1,5 @@
 from xml.etree import ElementTree
+from math import cos, hypot, pi
 
 def get_coords_by_id(name='map.osm'):
     ret = {}
@@ -6,7 +7,7 @@ def get_coords_by_id(name='map.osm'):
     root = data.getroot()
     for node in root:
         if node.tag == 'node':
-            ret[int(node.attrib['id'])] = (float(node.attrib['lat']), float(node.attrib['lon']))
+            ret[int(node.attrib['id'])] = (float(node.attrib['lon']), float(node.attrib['lat']))
     return ret
 
 def get_ways(coords, name='map.osm'):
@@ -34,10 +35,19 @@ def compress_coords(coords):
         i += 1
     return ret
 
+def dist1d(a, b):
+    return abs(a - b) * (40074000 / 360 / 2)
+
+def distx(x1, x2, y=0):
+    return abs(x1 - x2) * (40074000 * cos(y * pi / 180)) / 360
+
+def disty(y1, y2):
+    return abs(y1 - y2) * (40074000 / 360)
+
 def dist(coord1, coord2):
     x1, y1 = coord1
     x2, y2 = coord2
-    return ((x1 - x2)**2 + (y1 - y2)**2)**0.5 * (40074000 / 360)
+    return hypot(distx(x1, x2, y1), disty(y1, y2))
 
 def main():
     coords = get_coords_by_id()

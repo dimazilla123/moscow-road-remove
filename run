@@ -1,0 +1,11 @@
+#!/bin/bash
+python3 osm2graph.py > graph
+echo 1 >> graph
+python3 coord_dump.py
+./pseudo_solve < graph > res.txt
+python3 edges_to_lines.py > lines.txt
+python3 draw.py
+mv pic.jpg full.jpg
+./solver < graph > res.txt
+python3 edges_to_lines.py > lines.txt
+python3 draw.py
