@@ -25,7 +25,7 @@ def main():
         x2 = x2 / x_max * w
         y1 = y1 / y_max * h
         y2 = y2 / y_max * h
-        print(x1, y1, x2, y2)
+        #print(x1, y1, x2, y2)
         draw.line((x1, y1, x2, y2), fill=128)
     img.save("pic.jpg")
 

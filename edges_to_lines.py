@@ -15,7 +15,7 @@ def get_center(coords):
         min_y = min(min_y, y)
     #print(sx, sy)
     #print(sx / len(coords), sy / len(coords))
-    print((sx, sy), file=sys.stderr)
+    #print((sx, sy), file=sys.stderr)
     #return (sx / len(coords) + min_x, sy / len(coords) + min_y)
     return (min_x, min_y)
 
@@ -36,9 +36,9 @@ def main():
     f = open('ways.dump', 'rb')
     ways = pickle.load(f)
     f.close()
-    print(coords, file=sys.stderr)
+    #print(coords, file=sys.stderr)
     center = get_center(coords)
-    print(center, file=sys.stderr)
+    #print(center, file=sys.stderr)
     print(len(choses))
     for i in choses:
         (v, u, _) = ways[i]
